@@ -66,7 +66,7 @@ list 별로 장소에 따른 카테고리를 설정할 수 있도록 하였다. 
 
 TodoNavbar.vue에서 사용자가 필터링 할 상태에 대해 commit을 통해 선택된 데이터를 store.js로 넘겨주고, store.js의 mutation에서 selectCondition 함수를 통해 로컬의 selectcondition 데이터가 선택된 상태로 변경된다. 여기서 변경된 상태를 TodoList.vue에서 받아와 v-if문을 이용하여 필터링한다.
 
-* 카테고리 별 핑터링
+* 카테고리 별 필터링
 
 TodoNavbar.vue에서 사용자가 필터링 할 카테고리에 대해 commit을 통해 선택된 데이터를 store.js로 넘겨주고, store.js의 mutation에서 selectCategory 함수를 통해 로컬의 selectcategory 데이터가 선택된 상태로 변경된다. 여기서 변경된 상태를 TodoList.vue에서 받아와 v-if문을 이용하여 필터링한다.
 
@@ -104,13 +104,19 @@ VueX를 store.js에서 만들어 데이터를 관리, 제어해주었다. state�
 
 사용자 계정에 맞는 정보를 제공하고 보안하기 위해서 사용자 인증 시나리오를 구현하였다. 사용자 인증을 하는 방법에는 이메일/비밀번호 계정을 등록한 후 로그인 할 수도 있고 Google, Facebook, Github과 연동하여 로그인을 할 수도 있도록 구현하였다. 먼저 이메일/비밀번호로 로그인 하는 방법은 우선 a new account를 클릭하면 이메일과 비밀번호를 등록할 수 있는 Sign up 페이지로 이동하게 된다. 그 페이지에서 사용할 이메일과 비밀번호를 등록하여 주면 firebase auth에 createUserWithEmailAndPassword를 사용하여 만든 이메일과 비밀번호를 저장하게 된다. 그 후 다시 로그인 페이지로 넘어와서 등록한 이메일과 비밀번호를 치면 사용자 인증이 되어 자신의 계정의 list 들을 볼 수 있게 된다. Google과 Facebook, Github 로그인은 AuthProvider를 통해 각각의 auth 로그인 폼을 정해준다. 그 다음 로그인 버튼을 킅릭하게 되면 signInWithPopup을 이용하여 해당 auth 로그인 폼을 팝업 창으로 띄워주게 된다. 
 
+![image](https://user-images.githubusercontent.com/53864655/71880536-eae38200-3173-11ea-8514-3d3e2bf57b25.png)
+
 #### 10. 3rd Party 서비스 연동
 
 * 카카오톡(Kakao Talk)
 
 카카오톡의 javascript에서 지원하는 로그인 기능과 플러스친구 기능을 사용하였다. 우측 하단의 카카오톡 버튼을 누르면 카카오톡 로그인 창이 나타난다. 로그인을 완료하면 카카오톡으로 플러스친구와 채팅을 시작한다. 해당 플러스친구에서는 관리자에게 직접 문의와 스마트 채팅을 이용한 도움말을 지원한다. 이를 구현하기 위하여 vue-kakao-login 모듈과 vue-kakao-pf 모듈을 사용하였다. 이 두 모듈은 카카오에서 지원하는 javascript API를 사용하기 편하도록 구현해둔 모듈이다.
 
+![image](https://user-images.githubusercontent.com/53864655/71880590-077fba00-3174-11ea-9c3c-ce545e976a4b.png)
+
 * 오픈웨더(Open Weather)
+
+![image](https://user-images.githubusercontent.com/53864655/71880610-12d2e580-3174-11ea-8a05-2ee587b011f8.png)
 
 오픈 웨더 API를 사용하여 해당 지역의 기상 정보를 받아와 사용자에게 제공한다. 사용자의 지역에 대한 정보를 제공하기 위하여 vue-browser-geolocation 모델을 이용하여 GPS의 위치 정보를 받아온다. 받아온 경도와 위도를 오픈 웨더 API에 입력하여 json 형태로 기상 정보를 받아온다. 받아온 정보를 저장한 뒤 사용자에게 제공한다. 사용자는 LogOut 버튼 아래의 Weather 버튼을 누르면 GPS 사용 동의 창을 거친 후 위치정보를 받아와 오픈 웨더로 보내고 기상정보를 받아와 출력하는 형식이다. 그 후 기상 정보를 사용자에게 제공한다.
 
